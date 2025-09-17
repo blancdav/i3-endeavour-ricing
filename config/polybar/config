@@ -1,0 +1,44 @@
+[colors]
+background = #303446
+foreground = #c6d0f5
+primary = #8caaee
+kali = #a6d189
+windows = #89b4fa
+alert = #e78284
+
+[bar/top]
+width = 100%
+height = 28
+background = ${colors.background}
+foreground = ${colors.foreground}
+modules-left = i3
+modules-center =
+modules-right = pulseaudio weather date
+monitor = primary
+override-redirect = true
+tray-position = none
+bottom = false
+
+[module/i3]
+type = internal/i3
+label-focused = %name%
+label-focused-background = ${primary}
+label-focused-foreground = ${background}
+label-unfocused =
+label-urgent = %name%
+label-urgent-foreground = ${alert}
+
+[module/pulseaudio]
+type = custom/script
+exec = polybar-pulseaudio-control
+interval = 2
+label-volume = " %volume%%"
+label-muted = "婢"
+click-left = pactl set-sink-mute @DEFAULT_SINK@ toggle
+click-right = pavucontrol
+
+[module/weather]
+type = custom/script
+exec = ~/.local/bin/polybar-weather.sh
+interval = 600
+label = %output%
