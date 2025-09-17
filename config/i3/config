@@ -1,0 +1,98 @@
+# i3 config with Catppuccin Frappe theme and minimal workspaces
+set $mod Mod4
+font pango:JetBrains Mono Nerd Font 11
+
+# Colors
+set $blue      #8caaee
+set $green     #a6d189
+set $red       #e78284
+set $base      #303446
+set $mantle    #292c3c
+set $subtext1  #b5bfe2
+set $text      #c6d0f5
+
+# Client colors
+client.focused          $blue $blue $text $base
+client.focused_inactive $mantle $mantle $subtext1 $base
+client.unfocused        $mantle $mantle $subtext1 $base
+client.urgent           $red $red $base $text
+
+# Workspaces minimalistes
+set $ws1 ""
+set $ws2 ""
+set $ws3 ""
+set $ws4 ""
+set $ws5 ""
+set $ws6 ""
+set $ws7 ""
+set $ws8 ""
+set $ws9 "⏱️"
+set $ws10 ""
+set $ws11 ""
+set $ws12 "kairu"
+set $ws_k "k: "
+set $ws_w "w: "
+
+# Assign apps to workspaces
+assign [class="Alacritty"] $ws1
+assign [class="Neovim"] $ws1
+assign [class="Helix"] $ws1
+assign [class="Lf"] $ws1
+assign [class="Brave-browser"] $ws2
+assign [class="Tor Browser"] $ws2
+assign [class="Thunar"] $ws3
+assign [class="Code"] $ws4
+assign [class="VirtualBox Manager"] $ws5
+assign [class="virt-manager"] $ws5
+assign [class="discord"] $ws6
+assign [class="Obsidian"] $ws7
+assign [class="Vlc"] $ws8
+assign [class="stremio"] $ws8
+assign [class="mpv"] $ws8
+assign [class="Timeshift"] $ws9
+assign [class="Thunderbird"] $ws10
+assign [class="baca"] $ws11
+assign [class="yazi"] $ws11
+assign [class="fastfetch"] $ws11
+assign [class="xava"] $ws11
+assign [class="Kairu"] $ws12
+
+# Workspace shortcuts
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+bindsym $mod+Shift+0 workspace $ws11
+bindsym $mod+Shift+k workspace $ws12
+bindsym $mod+k workspace $ws_k
+bindsym $mod+w workspace $ws_w
+
+# Remove native i3 bar
+bar { status_command echo "Polybar replaces me" mode hide }
+
+# Autostart apps
+exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
+exec_always --no-startup-id autotiling
+exec_always --no-startup-id ~/.config/polybar/launch.sh
+exec_always --no-startup-id desktop-clock-widget --css ~/.config/desktop-clock-widget/style.css --position center --size 200
+
+# CMatrix screen saver after 10 min
+exec_always --no-startup-id xautolock -time 10 -locker "cmatrix -C green -b" -detectsleep &
+
+# Keybindings
+bindsym $mod+Return exec alacritty
+bindsym $mod+d exec rofi -show drun -theme ~/.config/rofi/catppuccin.rasi
+bindsym $mod+n exec alacritty -e nvim
+bindsym $mod+e exec alacritty -e yazi
+bindsym $mod+t exec thunderbird
+bindsym $mod+b exec baca
+bindsym $mod+Shift+u exec kairu
+bindsym $mod+v exec --no-startup-id ~/.local/bin/start-vm.sh
+bindsym $mod+Shift+v exec --no-startup-id ~/.local/bin/rofi-vm.sh
+bindsym $mod+Shift+l exec --no-startup-id ~/.config/i3lock-fancy/catppuccin.sh
