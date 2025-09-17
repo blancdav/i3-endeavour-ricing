@@ -1,0 +1,14 @@
+i3-catppuccin-setup/
+├─ README.md
+├─ LICENSE
+├─ post-install.sh
+├─ config/
+│  ├─ i3/config
+│  ├─ polybar/config
+│  ├─ polybar/launch.sh
+│  ├─ picom/picom.conf
+│  ├─ rofi/catppuccin.rasi
+│  ├─ desktop-clock-widget/style.css
+│  └─ i3lock-fancy/catppuccin.sh
+├─ scripts/start-vm.sh
+└─ scripts/rofi-vm.sh
